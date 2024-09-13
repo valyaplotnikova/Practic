@@ -3,6 +3,7 @@ from time import sleep
 
 class User:
     """Класс пользователя, содержащий атрибуты никнейм, пароль и возраст"""
+
     def __init__(self, nickname, password, age):
         self.nickname = nickname
         self.password = hash(password)
@@ -17,6 +18,7 @@ class User:
 
 class Video:
     """Класс видео, содержащий атрибуты"""
+
     def __init__(self, title, duration, time_now=0, adult_mode=False):
         self.title = title
         self.duration = duration
@@ -27,6 +29,7 @@ class Video:
 class UrTube:
     """Класс UrTube, содержащий атрибуты: users(список объектов User), videos(список объектов Video),
     current_user(текущий пользователь, User)"""
+
     def __init__(self):
         self.users = []
         self.videos = []
@@ -41,18 +44,23 @@ class UrTube:
     def log_out(self):
         self.current_user = None
 
-    def __contains__(self, item):
-        return any(item.nickname == obj.nickname for obj in self.users)
+    def __contains__(self, user):
+        return any(user.nickname == obj.nickname for obj in self.users)
 
     def register(self, nickname, password, age):
-        user = User(nickname, password, age)
-
-        if user not in self.users:
-            self.users.append(user)
+        new_user = User(nickname, password, age)
+        if new_user not in self.users:
+            self.users.append(new_user)
             self.log_in(nickname, password)
-            print(self.users)
         else:
             print(f"Пользователь {nickname} уже существует")
+        # for user in self.users:
+        #     if user.nickname == new_user.nickname:
+        #         print(f"Пользователь {nickname} уже существует")
+        #         break
+        # self.users.append(new_user)
+        # self.log_in(nickname, password)
+        # print(self.users)
 
     def add(self, *args):
         for arg in args:
@@ -73,10 +81,11 @@ class UrTube:
                     print('Вам нет 18 лет, пожалуйста покиньте страницу')
                 else:
                     if video.title == video_name:
-                        for i in range(1, video.duration):
+                        for i in range(1, video.duration+1):
                             video.time_now += 1
                             print(video.time_now, sep='')
                             sleep(1)
+                        video.time_now = 0
                         print("Конец видео")
         else:
             print("Войдите в аккаунт, чтобы смотреть видео")
@@ -93,9 +102,9 @@ class UrTube:
 Метод register, который принимает три аргумента: nickname, password, age, и добавляет пользователя в список,
  если пользователя не существует (с таким же nickname). Если существует, выводит на экран:
  "Пользователь {nickname} уже существует".
- 
+
   После регистрации, вход выполняется автоматически.
-  
+
 Метод log_out для сброса текущего пользователя на None.
 
 Метод add, который принимает неограниченное кол-во объектов класса Video и все добавляет в videos,
@@ -123,9 +132,9 @@ print(ur.get_videos('ПРОГ'))
 # Проверка на вход пользователя и возрастное ограничение
 ur.watch_video('Для чего девушкам парень программист?')
 ur.register('vasya_pupkin', 'lolkekcheburek', 13)
-# ur.watch_video('Для чего девушкам парень программист?')
+ur.watch_video('Для чего девушкам парень программист?')
 ur.register('urban_pythonist', 'iScX4vIJClb9YQavjAgF', 25)
-# ur.watch_video('Для чего девушкам парень программист?')
+ur.watch_video('Для чего девушкам парень программист?')
 
 # # Проверка входа в другой аккаунт
 ur.register('vasya_pupkin', 'F8098FM8fjm9jmi', 55)
@@ -133,7 +142,6 @@ print(ur.current_user)
 
 # Попытка воспроизведения несуществующего видео
 ur.watch_video('Лучший язык программирования 2024 года!')
-
 
 """
 ['Лучший язык программирования 2024 года']
