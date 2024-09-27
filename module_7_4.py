@@ -1,9 +1,9 @@
 def team_num_count(team, team_num):
-    print('В команде %s кода участников: %s ! ' % (team, team_num))
+    print('В команде %s кода участников: %d ! ' % (team, team_num))
 
 
 def team_all_count(*team_num):
-    print('Итого сегодня в командах участников: %s и %s !' % (team_num[0], team_num[1]))
+    print('Итого сегодня в командах участников: %d и %d !' % (team_num[0], team_num[1]))
 
 
 def team_score(team, score):
