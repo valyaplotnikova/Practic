@@ -9,14 +9,14 @@ dp = Dispatcher()
 # Этот хэндлер будет срабатывать на команду "/start"
 @dp.message(Command(commands=["start"]))
 async def start(message: Message):
-    await message.answer('Привет!\nЯ бот помогающий твоему здоровью.')
+    print('Привет!\nЯ бот помогающий твоему здоровью.')
 
 
 # Этот хэндлер будет срабатывать на любые текстовые сообщения,
 # кроме команд "/start"
 @dp.message()
 async def all_massages(message: Message):
-    await message.answer('Введите команду /start, чтобы начать общение')
+    print('Введите команду /start, чтобы начать общение')
 
 
 if __name__ == '__main__':
