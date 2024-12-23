@@ -2,7 +2,7 @@ from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
 from aiogram.types import Message
 
-api = '7115803232:AAF67W6cAht1Gh_od5sg-CTN9un2ZABDqJ4'
+api = ''
 bot = Bot(token=api)
 dp = Dispatcher()
 
